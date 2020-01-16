@@ -1,0 +1,81 @@
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+]0;~/Desktop/Programming/R/museR[?1034h(base) emilypalmer@Emilys-MacBook-Pro museR[32m[00m $ git init
+Initialized empty Git repository in /Users/emilypalmer/Desktop/Programming/R/museR/.git/
+]0;~/Desktop/Programming/R/museR(base) emilypalmer@Emilys-MacBook-Pro museR[32m[00m $ git branch
+[?1h=[K[?1l>]0;~/Desktop/Programming/R/museR(base) emilypalmer@Emilys-MacBook-Pro museR[32m[00m $ git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	[31m.Rbuildignore[m
+	[31m.Rproj.user/[m
+	[31mDESCRIPTION[m
+	[31mNAMESPACE[m
+	[31mR/[m
+	[31mREADME.md[m
+	[31mdata-raw/[m
+	[31mimport_xml_files.sh[m
+	[31mman/[m
+	[31mmuseR.Rproj[m
+	[31mtests/[m
+	[31mthesis.pdf[m
+
+nothing added to commit but untracked files present (use "git add" to track)
+]0;~/Desktop/Programming/R/museR(base) emilypalmer@Emilys-MacBook-Pro museR[32m[00m $ gs
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	[31m.Rbuildignore[m
+	[31m.Rproj.user/[m
+	[31mDESCRIPTION[m
+	[31mNAMESPACE[m
+	[31mR/[m
+	[31mREADME.md[m
+	[31mdata-raw/[m
+	[31mimport_xml_files.sh[m
+	[31mman/[m
+	[31mmuseR.Rproj[m
+	[31mtests/[m
+	[31mthesis.pdf[m
+
+nothing added to commit but untracked files present (use "git add" to track)
+]0;~/Desktop/Programming/R/museR(base) emilypalmer@Emilys-MacBook-Pro museR[32m[00m $ git remote add origin git@github.com:u sername/new_repo[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ce mpalmer/The[K[K[K[K[K[K[K[K[K[K[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kgit remote add origin https://github.c om/empalmer/museR.git[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K git remote add origin git@github.com: username/new_repo[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kempalmer/museR
+]0;~/Desktop/Programming/R/museR(base) emilypalmer@Emilys-MacBook-Pro museR[32m[00m $ git push -u origin master
+error: src refspec master does not match any
+[31merror: failed to push some refs to 'git@github.com:empalmer/museR'
+[m]0;~/Desktop/Programming/R/museR(base) emilypalmer@Emilys-MacBook-Pro museR[32m[00m $ git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	[31m.Rbuildignore[m
+	[31m.Rproj.user/[m
+	[31mDESCRIPTION[m
+	[31mNAMESPACE[m
+	[31mR/[m
+	[31mREADME.md[m
+	[31mdata-raw/[m
+	[31mimport_xml_files.sh[m
+	[31mman/[m
+	[31mmuseR.Rproj[m
+	[31mtests/[m
+	[31mthesis.pdf[m
+
+nothing added to commit but untracked files present (use "git add" to track)
+]0;~/Desktop/Programming/R/museR(base) emilypalmer@Emilys-MacBook-Pro museR[32m[00m $ git add .

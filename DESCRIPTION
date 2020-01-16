@@ -1,0 +1,17 @@
+Package: museR
+Title: Analyzes Music In *kern Format
+Version: 0.0.0.9000
+Authors@R: person("Emily", "Palmer", email = "empalmer@reed.edu",
+                  role = c("aut", "cre"))
+Description: Analyzes musical scores in the *kern format.
+Depends: R (>= 3.4.0)
+License: CCO
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
+Imports:
+  devtools,
+  tidyverse,
+  bazar,
+  purrrlyr
+Suggests: testthat
