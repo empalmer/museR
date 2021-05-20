@@ -1,0 +1,82 @@
+---
+title: "Genre"
+author: "241 Final"
+#date: "5/9/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source("../R/header.R")
+source("genre.R")
+.src(d = 1)
+```
+
+```{r}
+# // Genre kern score lists
+# Since some kern files don't use, toss away the bad indices
+etudes <- byGenre(genre = "etude", bad_idx = 13)
+preludes <- byGenre(genre = "prelude", bad_idx = c(11,14))
+fugues <- byGenre(genre = "fugue", bad_idx = 15)
+ballad <- byGenre(genre = "ballad", bad_idx = c(9,14,16))
+ragtime <- byGenre(genre = "ragtime", bad_idx = NA)
+waltz <- byGenre(genre = "waltz", bad_idx = c(1,2,12))
+```
+
+```{r}
+# Get a list of scores
+genre_list <- list(etudes = etudes, preludes = preludes, fugues=fugues,
+                   ragtime = ragtime, waltz=waltz)
+# Get a string vector of genres to pass to map2_dfr
+genres <- c("etude","prelude", "fugue", "ragtime","waltz")
+```
+
+```{r}
+# Write csv
+write <- F
+if(write) {
+  # Get the observed rhythmic entropy of each genre score
+  GENRE_ENTROPY <- map2_dfr(genre_list, genres, .genreResult)
+  write.csv(GENRE_ENTROPY, file = "GENRE-ENTROPY.csv", row.names = F)
+} else {
+  GENRE_ENTROPY <- read.csv("GENRE-ENTROPY.csv")
+}
+```
+
+```{r}
+# Rhythmic entropy plot
+GENRE_ENTROPY %>% 
+  ggplot() + 
+  geom_boxplot(aes(x = genre, y = entropy, color = genre)) +
+  labs(title = "Rhythmic Entropy By Genre")
+```
+
+```{r}
+# Helper function; obtain the most common rhythmic subdivison from a score
+most_common_rhythm <- function(score){ names(which.max(rhythm_freq(score))) }
+# Helper function to pass to pass into map2_dfr
+MCR <- function(genre_scores, genre){
+  data.frame(rhythm = map_chr(genre_scores, most_common_rhythm)) %>% .labelGenre(genre)
+}
+# Write csv
+write <- F
+if(write){
+  # Get the most common rhythm in each genre
+  MCR_GENRES <- map2_dfr(genre_list, genres, MCR)
+  # Make sure the rhythms are valid
+  MCR_GENRES <- MCR_GENRES %>% filter(rhythm %in% RHYTHMS)
+  write.csv(MCR_GENRES, "MCR-GENRE.csv", row.names = F)
+} else{
+  MCR_GENRES <- read.csv("MCR-GENRE.csv")
+}
+```
+
+```{r, echo = T}
+# Plot most common rhythmic subdivision
+MCR_GENRES <- MCR_GENRES %>% mutate(rhythm = as.factor(rhythm) %>% fct_infreq()) 
+MCR_GENRES %>% 
+  ggplot() + 
+  geom_bar(aes(fill = genre, y = rhythm)) + 
+  scale_fill_brewer(type = "qual", palette = "Set2") +
+  labs(title = "Most Common Rhythmic Subdivision by Musical Genre")
+```
