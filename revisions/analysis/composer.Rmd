@@ -1,0 +1,110 @@
+---
+title: "Composer"
+author: "241 Final"
+#date: "5/9/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source("../R/header.R")
+source("composer.R")
+.src(d = 1)
+```
+
+```{r}
+# // Composer kern score lists
+# Since some kern files don't use, toss away the bad indices
+bach <- byComposer("bach", bad_idx = 2)
+joplin <- byComposer("joplin")
+chopin <- byComposer("chopin")
+beethoven <- byComposer("beethoven", bad_idx = c(4,7,8,9,11,15))
+vivaldi <- byComposer("vivaldi", bad_idx = 14)
+# Create a list of scores by composer
+scores_list <- list(bach = bach, 
+                   joplin = joplin, 
+                   chopin = chopin,
+                   beethoven = beethoven, 
+                   vivaldi = vivaldi)
+# Get a string vector of composers to pass to map2_dfr
+composers <- c("bach","joplin", "chopin", "beethoven", "vivaldi")
+```
+
+```{r}
+# Write the data to avoid having to reevaluate
+write <- F
+if(write) {
+  # Get an aggregate dataframe of the modal features of every composer
+  MODAL <- map2_dfr(score_list, composers, .composerModal)
+  # Toss away NaNs (from badly classified scale degrees)
+  MODAL_NAN <- na.omit(MODAL)
+  # Write csv
+  write.csv(MODAL_NAN, file = "COMPOSERS.csv", row.names = F)
+} else {
+  MODAL_NAN <- read.csv(file = "COMPOSERS.csv")
+}
+```
+
+```{r}
+# Create a featuer vector for easy access
+features <- c("Bluesiness","Modal Interchange",
+              "Subdominant-Borrowing",
+              "Dissonance","Consonance")
+```
+
+```{r}
+# Title function
+.makeTitle <- function(title_str){
+  paste("Average Composition",title_str,"by Composer")
+}
+# Barplot wrapper function
+modalFeatureBarplot <- function(feature, title_str){
+  MODAL_NAN %>%
+    group_by(composer) %>%
+    summarize(mean = mean({{feature}})) %>%
+    ggplot(aes(x = composer, y = mean, fill = composer)) +
+    geom_bar(stat = "identity") +
+    scale_fill_brewer(type = "qual", palette = "Set1") +
+    labs(title = .makeTitle(title_str))
+}
+```
+
+```{r}
+# Get the bar plots
+modalFeatureBarplot(blues, features[1])
+modalFeatureBarplot(interchange, features[2])
+modalFeatureBarplot(borrowed_sub, features[3])
+modalFeatureBarplot(dissonance, features[4])
+modalFeatureBarplot(consonance, features[5])
+```
+
+```{r}
+# Title function
+.makeTitle <- function(title_str){
+  paste("Score",title_str,"Distribution by Composer")
+}
+# Boxplot wrapper function
+modalFeatureBoxplot <- function(feature, title_str){
+  MODAL_NAN %>%
+    ggplot(aes(x = composer, y = {{ feature}}, color = composer)) +
+    geom_boxplot() +
+    scale_color_brewer(type = "qual", palette = "Set1") +
+    labs(title = .makeTitle(title_str))
+}
+```
+
+```{r}
+# Filename helper function
+.makeFilename <- function(feature){ paste(feature, ".jpg", sep = "")}
+# Get the boxplots
+modalFeatureBoxplot(blues, features[1])
+ggsave(.makeFilename(features[1]))
+modalFeatureBoxplot(interchange, features[2])
+ggsave(.makeFilename(features[2]))
+modalFeatureBoxplot(borrowed_sub, features[3])
+ggsave(.makeFilename(features[3]))
+modalFeatureBoxplot(dissonance, features[4])
+ggsave(.makeFilename(features[4]))
+modalFeatureBoxplot(consonance, features[5])
+ggsave(.makeFilename(features[5]))
+```
